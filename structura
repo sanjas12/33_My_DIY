@@ -1,0 +1,93 @@
+diy-app/  
+│  
+├── backend/                      # Монолитное backend-приложение  
+│   ├── apps/                      # Независимые модули (будущие микросервисы)  
+│   │   ├── auth/                  # Авторизация и пользователи  
+│   │   │   ├── models.py          # User, Session  
+│   │   │   ├── schemas.py         # Pydantic-модели  
+│   │   │   ├── dependencies.py    # JWT, проверка прав  
+│   │   │   ├── routes.py          # /register, /login, /profile  
+│   │   │   └── service.py         # Логика (регистрация, аутентификация)  
+│   │       └── tests/              # Тесты модуля
+│   │          ├── test_auth.py
+│   │          └── conftest.py
+│   │   │  
+│   │   ├── diy_recipes/              # Рецепты  
+│   │   │   ├── models.py          # Recipe, Category, Ingredient  
+│   │   │   ├── schemas.py  
+│   │   │   ├── routes.py          # /recipes, /recipes/{id}  
+│   │   │   └── service.py         # Логика (CRUD, поиск)  
+    │   │   └── tests/
+    │   │       ├── test_recipes.py
+    │   │       └── test_services.py
+│   │   │  
+│   └── storage/                # Модуль загрузки файлов
+│       ├── schemas.py          # FileUploadResponse
+│       ├── service.py          # Логика: сохранение в S3/Local
+│       ├── routes.py           # API endpoint (/upload)
+│       └── tests/
+│           └── test_storage.py
+
+│   ├── core/                     # Общие компоненты  
+│   │   ├── config.py             # Настройки (env-переменные)  
+│   │   ├── database.py           # Подключение к БД  
+│   │   └── exceptions.py         # Обработка ошибок  
+│   │  
+│   ├── tests/                    # Тесты (разделены по модулям)  
+    │   ├── conftest.py             # Фикстуры pytest
+    │   └── test_api_integration.py  # Тесты API (сквозные сценарии)
+│   │  
+│   ├── main.py                   # Точка входа (объединение роутеров)  
+│   └── pyproject.toml            # Зависимости  
+│  
+├── frontend/                     # React-приложение  
+│
+    ├── public/                  # Статические файлы (index.html, favicon)
+    │   ├── index.html
+    │   └── assets/              # Глобальные стили, шрифты, картинки
+    │
+    ├── src/
+    │   ├── api/                 # API-клиенты (разделены по модулям)
+    │   │   ├── auth.api.ts      # Запросы к /auth
+    │   │   ├── recipes.api.ts   # Запросы к /recipes
+    │   │   └── storage.api.ts   # Запросы к /storage
+    │   │
+    │   ├── app/                 # Настройки приложения
+    │   │   ├── store.ts         # Redux-хранилище
+    │   │   ├── hooks.ts         # Кастомные хуки
+    │   │   └── router.tsx       # Навигация (React Router)
+    │   │
+    │   ├── modules/             # Модули (как в backend)
+    │   │   ├── auth/            # Авторизация
+    │   │   │   ├── components/  # UI-компоненты (LoginForm, RegisterForm)
+    │   │   │   ├── pages/       # Страницы (LoginPage, RegisterPage)
+    │   │   │   ├── slices/      # Redux-редюсеры (authSlice)
+    │   │   │   └── types.ts     # Типы (User, AuthResponse)
+    │   │   │
+    │   │   ├── recipes/         # Рецепты
+    │   │   │   ├── components/  # RecipeCard, SearchBar
+    │   │   │   ├── pages/       # RecipeListPage, RecipeDetailPage
+    │   │   │   ├── slices/      # recipesSlice
+    │   │   │   └── types.ts     # Recipe, Ingredient
+    │   │   │
+    │   │   └── shared/          # Общие компоненты
+    │   │       ├── ui/          # Кнопки, инпуты, модалки
+    │   │       └── utils/       # Вспомогательные функции
+    │   │
+    │   ├── styles/              # Глобальные стили (CSS/SCSS/Tailwind)
+    │   │   ├── base.css         # Сброс стилей, переменные
+    │   │   └── themes/          # Темы (light/dark)
+    │   │
+    │   ├── App.tsx              # Корневой компонент
+    │   └── main.tsx             # Точка входа (рендер React)
+    │
+    ├── .env                     # Переменные окружения (API_URL)
+    ├── tsconfig.json            # Настройки TypeScript
+    └── package.json             # Зависимости и скрипты
+│  
+├── docker/                       # Конфиги для Docker  
+│   ├── backend.Dockerfile        # Сборка монолита  
+│   └── nginx.conf                # Прокси для API  
+│  
+├── .env                          # Общие переменные (DB_URL, JWT_SECRET)  
+└── README.md                     # Инструкции по запуску  

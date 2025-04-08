@@ -1,0 +1,10 @@
+[project]
+name = "recipe-app"
+version = "0.1.0"  # Добавьте версию вашего проекта
+requires-python = ">=3.9"
+dependencies = [
+    "fastapi",
+    "uvicorn[standard]",
+    "uvloop; sys_platform != 'win32'",  # uvloop не поддерживает Windows
+    "httptools",
+]
