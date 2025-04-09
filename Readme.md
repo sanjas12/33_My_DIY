@@ -24,4 +24,5 @@ TODO
 Голосовой интерфейс	Whisper + TTS	        Средняя
 
 ### Usage - Develeper (Windows)
+source venv/Scripts/activate
 cd diy-app/backend/ && uvicorn main:app --reload
