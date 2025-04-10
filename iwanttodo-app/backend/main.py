@@ -11,8 +11,8 @@ from core.exceptions import setup_exception_handlers
 def create_app() -> FastAPI:
     # Инициализация приложения
     app = FastAPI(
-        title="DIY Recipes API",
-        description="API для управления DIY",
+        title="IWantToDo Recipes API",
+        description="API для управления Recipes DIY",
         version="1.0.0",
         docs_url="/api/docs",
         redoc_url="/api/redoc",
@@ -60,7 +60,7 @@ app = create_app()
 @app.get("/")
 async def root():
     return {
-        "message": "Welcome to DIY Recipes API",
+        "message": "Welcome to IWantToDo Recipes API",
         "docs": "/api/docs",
         "redoc": "/api/redoc",
     }

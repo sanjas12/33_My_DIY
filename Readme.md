@@ -25,4 +25,4 @@ TODO
 
 ### Usage - Develeper (Windows)
 source venv/Scripts/activate
-cd diy-app/backend/ && uvicorn main:app --reload
+cd iwanttodo-app/backend/ && uvicorn main:app --reload
